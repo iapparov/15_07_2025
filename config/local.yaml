@@ -1,0 +1,7 @@
+env: local # local, prod
+http_port: 8080 
+max_tasks: 3
+allowed_types: 
+  - jpeg 
+  - pdf
+max_objects: 3
