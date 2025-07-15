@@ -21,6 +21,9 @@ func main() {
 
 		// Регистрация HTTP-сервера
 		fx.Invoke(di.StartHTTPServer),
+		fx.Invoke(func(handler *web.UserHandler) {
+        handler.StartWorker()
+    }),
 	)
 
 	app.Run()

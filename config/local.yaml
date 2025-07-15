@@ -1,7 +1,8 @@
-env: local # local, prod
-http_port: 8080 
+env: local
+http_port: 8080
 max_tasks: 3
 allowed_types: 
-  - jpeg 
+  - jpg 
   - pdf
 max_objects: 3
+archive_path: "./archive"

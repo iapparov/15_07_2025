@@ -3,6 +3,7 @@ module zip_downloader
 go 1.24.4
 
 require (
+	github.com/go-chi/chi/v5 v5.2.2 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	go.uber.org/dig v1.19.0 // indirect
 	go.uber.org/fx v1.24.0 // indirect

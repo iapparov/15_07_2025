@@ -8,6 +8,7 @@ const(
 	StatusWait	Status = "Wait"
 	StatusError	Status = "Error"
 	StatusReady	Status = "Ready"
+	StatusDone	Status = "Done"
 )
 
 type Storage struct{

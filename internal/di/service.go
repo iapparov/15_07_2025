@@ -1,26 +1,31 @@
 package di
 
 import (
-		"context"
-		"log"
-		"net/http"
-		"zip_downloader/internal/web"
-		"go.uber.org/fx"
+	"context"
+	"fmt"
+	"log"
+	"net/http"
+	"zip_downloader/internal/config"
+	"zip_downloader/internal/web"
+
+	"github.com/go-chi/chi/v5"
+	"go.uber.org/fx"
 )
 
-func StartHTTPServer(lc fx.Lifecycle, user_handler *web.UserHandler) {
+func StartHTTPServer(lc fx.Lifecycle, user_handler *web.UserHandler, config *config.Config) {
 	// Регистрируем маршруты
-	mux := http.NewServeMux()
-	web.RegisterRoutes(mux, user_handler) // новый метод, если нужно
+	router := chi.NewRouter()
+	web.RegisterRoutes(router, user_handler, *config)
 
+	addres := fmt.Sprintf(":%d", config.Http_port)
 	server := &http.Server{
-		Addr:    ":8080",
-		Handler: mux, 
+		Addr:    addres,
+		Handler: router, 
 	}
 
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			log.Println("Server started on http://localhost:8080")
+			log.Printf("Server started on http://localhost:%d\n", config.Http_port)
 			go server.ListenAndServe()
 			return nil
 		},
